@@ -1,23 +1,23 @@
-using aspnetapp;
-var builder = WebApplication.CreateBuilder(args);
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddDbContext<CounterContext>();
-
-var app = builder.Build();
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+namespace aspnetapp
 {
-    app.UseExceptionHandler("/Error");
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            CreateHostBuilder(args).Build().Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
 }
 
-app.UseStaticFiles();
 
-app.UseRouting();
-
-app.UseAuthorization();
-app.MapControllers();
-app.MapRazorPages();
-
-app.Run();
