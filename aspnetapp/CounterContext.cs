@@ -57,7 +57,7 @@ namespace aspnetapp
 
             modelBuilder.Entity<Menus>().ToTable("Menus");
             modelBuilder.Entity<Users>().ToTable("Users");
-            modelBuilder.Entity<UserMenus>().ToTable("UserMenus");
+            modelBuilder.Entity<UserMenus>().ToTable("UserMenus").HasKey(new string[] { "openid", "menucode" });
 
             OnModelCreatingPartial(modelBuilder);
         }
