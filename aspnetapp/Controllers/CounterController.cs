@@ -24,7 +24,6 @@ public class DataRequest
 
 namespace aspnetapp.Controllers
 {
-    [Route("api/count")]
     [ApiController]
     public class CounterController : ControllerBase
     {
@@ -54,6 +53,8 @@ namespace aspnetapp.Controllers
             }
         }
         // GET: api/count
+
+        [Route("api/count")]
         [HttpGet]
         public async Task<ActionResult<CounterResponse>> GetCounter()
         {
@@ -63,6 +64,7 @@ namespace aspnetapp.Controllers
 
         // POST: api/Counter
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        [Route("api/count")]
         [HttpPost]
         public async Task<ActionResult<CounterResponse>> PostCounter(CounterRequest data)
         {
@@ -92,6 +94,7 @@ namespace aspnetapp.Controllers
 
         #region х╗оч
 
+        [Route("api/GetUserMenus")]
         [HttpGet]
         public async Task<ActionResult<Result<List<Menus>>>> GetUserMenus()
         {
@@ -141,6 +144,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/ApplyUser")]
         [HttpPost]
         public async Task<ActionResult<Result<string>>> ApplyUser(CounterRequest request)
         {
@@ -173,6 +177,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="menu"></param>
         /// <returns></returns>
+        [Route("api/SaveUserMenu")]
         [HttpPost]
         public async Task<ActionResult<Result<string>>> SaveUserMenu(SaveUserMenu menu)
         {
@@ -209,6 +214,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetDataDay")]
         [HttpGet]
         public async Task<ActionResult<Result<Data_Day>>> GetDataDay(DataRequest request)
         {
@@ -221,6 +227,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetDataMonth")]
         [HttpGet]
         public async Task<ActionResult<Result<Data_Month>>> GetDataMonth(DataRequest request)
         {
@@ -233,6 +240,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetDataOutHourly")]
         [HttpGet]
         public async Task<ActionResult<Result<OutHourlyDto>>> GetDataOutHourly(DataRequest request)
         {
@@ -251,6 +259,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetData7Day")]
         [HttpGet]
         public async Task<ActionResult<Result<Day7Dto>>> GetData7Day(DataRequest request)
         {
@@ -271,6 +280,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetDataInv")]
         [HttpGet]
         public async Task<ActionResult<Result<InvDto>>> GetDataInv(DataRequest request)
         {
@@ -296,6 +306,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetDataInOut")]
         [HttpGet]
         public async Task<ActionResult<Result<InOutDto>>> GetDataInOut(DataRequest request)
         {
@@ -317,6 +328,7 @@ namespace aspnetapp.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Route("api/GetDataInOutHourly")]
         [HttpGet]
         public async Task<ActionResult<Result<InOutHourlyDto>>> GetDataInOutHourly(DataRequest request)
         {
