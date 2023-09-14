@@ -103,7 +103,7 @@ namespace aspnetapp.Controllers
             {
                 // 从header中取到openid
                 var headers = _httpContextAccessor.HttpContext.Request.Headers;
-                var openid = headers["X-WX-OPENID"].ToString()??"";
+                var openid = headers["X-WX-OPENID"].ToString() ?? "";
 
                 // 用户有无权限
                 var user = await _context.Users.Where(u => u.openid == openid).FirstOrDefaultAsync();
@@ -246,7 +246,7 @@ namespace aspnetapp.Controllers
         {
             var maxDate = await _context.Data_OutHourly.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
 
-            var data = await _context.Data_OutHourly.Where(d => d.menucode == request.menucode && d.date == maxDate.date).OrderBy(d => d.time).ToListAsync();
+            var data = await _context.Data_OutHourly.Where(d => d.menucode == request.menucode && d.date == maxDate.date).OrderBy(d => d.time.Length).ThenBy(d => d.time).ToListAsync();
 
             var result = new OutHourlyDto();
             result.xData = data.Select(d => d.time).ToArray();
@@ -263,9 +263,9 @@ namespace aspnetapp.Controllers
         [HttpGet]
         public async Task<ActionResult<Result<Day7Dto>>> GetData7Day(string menucode)
         {
-            var maxDate = await _context.Data_7Day.Where(d => d.menucode ==  menucode).OrderByDescending(d => d.date).FirstAsync();
+            var maxDate = await _context.Data_7Day.Where(d => d.menucode == menucode).OrderByDescending(d => d.date).FirstAsync();
 
-            var data = await _context.Data_7Day.Where(d => d.menucode ==  menucode && d.date == maxDate.date).OrderBy(d => d.time).ToListAsync();
+            var data = await _context.Data_7Day.Where(d => d.menucode == menucode && d.date == maxDate.date).OrderBy(d => d.time.Length).ThenBy(d => d.time).ToListAsync();
 
             var result = new Day7Dto();
             result.xData = data.Select(d => d.time).ToArray();
@@ -334,7 +334,7 @@ namespace aspnetapp.Controllers
         {
             var maxDate = await _context.Data_InOutHourly.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
 
-            var data = await _context.Data_InOutHourly.Where(d => d.menucode == request.menucode && d.date == maxDate.date).OrderBy(d => d.time).ToListAsync();
+            var data = await _context.Data_InOutHourly.Where(d => d.menucode == request.menucode && d.date == maxDate.date).OrderBy(d => d.time.Length).ThenBy(d => d.time).ToListAsync();
 
             var result = new InOutHourlyDto();
             result.xData = data.Select(d => d.time).ToArray();
