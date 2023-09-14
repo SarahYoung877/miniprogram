@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
@@ -15,6 +16,7 @@ namespace aspnetapp
     /// <summary>
     /// 今日概况
     /// </summary>
+    [Keyless]
     public class Data_Day
     {
         /// <summary>
@@ -38,6 +40,7 @@ namespace aspnetapp
     /// <summary>
     /// 本月累计
     /// </summary>
+    [Keyless]
     public class Data_Month
     {
         /// <summary>
@@ -55,6 +58,7 @@ namespace aspnetapp
         public int jiaofu { get; set; } = 0;
     }
 
+    [Keyless]
     public class Data_OutHourly
     {
         /// <summary>
@@ -74,6 +78,7 @@ namespace aspnetapp
     /// <summary>
     /// 近7天
     /// </summary>
+    [Keyless]
     public class Data_7Day
     {
         /// <summary>
@@ -95,6 +100,7 @@ namespace aspnetapp
     /// <summary>
     /// 立库库存
     /// </summary>
+    [Keyless]
     public class Data_Inv
     {
         /// <summary>
@@ -115,6 +121,7 @@ namespace aspnetapp
     /// <summary>
     /// 立库进出
     /// </summary>
+    [Keyless]
     public class Data_InOut
     {
         /// <summary>
@@ -136,6 +143,7 @@ namespace aspnetapp
     /// <summary>
     /// 立库每小时进出
     /// </summary>
+    [Keyless]
     public class Data_InOutHourly
     {
         /// <summary>
@@ -154,6 +162,7 @@ namespace aspnetapp
     }
 
 
+    [Keyless]
     public class Menus
     {
         public string code { get; set; }
@@ -161,6 +170,7 @@ namespace aspnetapp
         public string name { get; set; }
     }
 
+    [Keyless]
     public class Users
     {
         public string openid { get; set; }
@@ -172,6 +182,7 @@ namespace aspnetapp
         public string admin { get; set; }
     }
 
+    [Keyless]
     public class UserMenus
     {
         public string openid { get; set; }
