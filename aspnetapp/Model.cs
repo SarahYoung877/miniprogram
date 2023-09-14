@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace aspnetapp
 {
@@ -170,9 +171,9 @@ namespace aspnetapp
         public string name { get; set; }
     }
 
-    [Keyless]
     public class Users
     {
+        [Key]
         public string openid { get; set; }
 
         public string name { get; set; }
@@ -182,7 +183,6 @@ namespace aspnetapp
         public string admin { get; set; }
     }
 
-    [Keyless]
     public class UserMenus
     {
         public string openid { get; set; }
