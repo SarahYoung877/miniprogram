@@ -103,7 +103,7 @@ namespace aspnetapp.Controllers
             {
                 // 从header中取到openid
                 var headers = _httpContextAccessor.HttpContext.Request.Headers;
-                var openid = headers["X-WX-OPENID"];
+                var openid = headers["X-WX-OPENID"].ToString()??"";
 
                 // 用户有无权限
                 var user = await _context.Users.Where(u => u.openid == openid).FirstOrDefaultAsync();
@@ -153,7 +153,7 @@ namespace aspnetapp.Controllers
             {
                 // 从header中取到openid
                 var headers = _httpContextAccessor.HttpContext.Request.Headers;
-                var openid = headers["X-WX-OPENID"];
+                var openid = headers["X-WX-OPENID"].ToString() ?? "";
 
                 var user = await _context.Users.Where(u => u.openid == openid).FirstOrDefaultAsync();
                 if (user == null || user.openid == "")
@@ -215,7 +215,7 @@ namespace aspnetapp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Route("api/GetDataDay")]
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<Result<Data_Day>>> GetDataDay(DataRequest request)
         {
             var data = await _context.Data_Day.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstOrDefaultAsync();
@@ -228,7 +228,7 @@ namespace aspnetapp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Route("api/GetDataMonth")]
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<Result<Data_Month>>> GetDataMonth(DataRequest request)
         {
             var data = await _context.Data_Month.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstOrDefaultAsync();
@@ -241,7 +241,7 @@ namespace aspnetapp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Route("api/GetDataOutHourly")]
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<Result<OutHourlyDto>>> GetDataOutHourly(DataRequest request)
         {
             var maxDate = await _context.Data_OutHourly.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
@@ -261,11 +261,11 @@ namespace aspnetapp.Controllers
         /// <returns></returns>
         [Route("api/GetData7Day")]
         [HttpGet]
-        public async Task<ActionResult<Result<Day7Dto>>> GetData7Day(DataRequest request)
+        public async Task<ActionResult<Result<Day7Dto>>> GetData7Day(string menucode)
         {
-            var maxDate = await _context.Data_7Day.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
+            var maxDate = await _context.Data_7Day.Where(d => d.menucode ==  menucode).OrderByDescending(d => d.date).FirstAsync();
 
-            var data = await _context.Data_7Day.Where(d => d.menucode == request.menucode && d.date == maxDate.date).OrderBy(d => d.time).ToListAsync();
+            var data = await _context.Data_7Day.Where(d => d.menucode ==  menucode && d.date == maxDate.date).OrderBy(d => d.time).ToListAsync();
 
             var result = new Day7Dto();
             result.xData = data.Select(d => d.time).ToArray();
@@ -281,7 +281,7 @@ namespace aspnetapp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Route("api/GetDataInv")]
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<Result<InvDto>>> GetDataInv(DataRequest request)
         {
             var maxDate = await _context.Data_Inv.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
@@ -307,7 +307,7 @@ namespace aspnetapp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Route("api/GetDataInOut")]
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<Result<InOutDto>>> GetDataInOut(DataRequest request)
         {
             var maxDate = await _context.Data_InOut.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
@@ -329,7 +329,7 @@ namespace aspnetapp.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Route("api/GetDataInOutHourly")]
-        [HttpGet]
+        [HttpPost]
         public async Task<ActionResult<Result<InOutHourlyDto>>> GetDataInOutHourly(DataRequest request)
         {
             var maxDate = await _context.Data_InOutHourly.Where(d => d.menucode == request.menucode).OrderByDescending(d => d.date).FirstAsync();
